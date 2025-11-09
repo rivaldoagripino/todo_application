@@ -6,9 +6,11 @@ class CustomFilterSegmentedButton extends StatefulWidget {
   const CustomFilterSegmentedButton({
     super.key,
     required this.selected,
+    required this.onSelectionChanged,
   });
 
   final String selected;
+  final Function(String) onSelectionChanged;
 
   @override
   State<CustomFilterSegmentedButton> createState() =>
@@ -40,6 +42,7 @@ class _CustomFilterSegmentedButtonState
           ],
           selected: {selected},
           onSelectionChanged: (newSelection) {
+            widget.onSelectionChanged(newSelection.first);
             setState(() => selected = newSelection.first);
           },
           showSelectedIcon: false,
