@@ -7,7 +7,7 @@ import 'package:todo_application/core/theme/app_text_styles.dart';
 import 'package:todo_application/modules/shared/components/custom_app_bar.dart';
 import 'package:todo_application/modules/todo/presentation/cubits/todo_cubit.dart';
 import 'package:todo_application/modules/todo/presentation/cubits/todo_state.dart';
-import 'package:todo_application/modules/todo/presentation/widgets/add_todo_bottom_sheet.dart';
+import 'package:todo_application/modules/todo/presentation/widgets/custom_todo_bottom_sheet.dart';
 import 'package:todo_application/modules/todo/presentation/widgets/custom_add_button.dart';
 import 'package:todo_application/modules/todo/presentation/widgets/custom_exclude_button.dart';
 import 'package:todo_application/modules/todo/presentation/widgets/custom_filter_segmented_button.dart';
@@ -124,9 +124,9 @@ class _TodoPageState extends ModularCubitState<TodoPage, TodoCubit> {
                             isScrollControlled: true,
                             backgroundColor: Colors.transparent,
                             builder: (context) {
-                              return AddTodoBottomSheet(
-                                onAdd: (title) {
-                                  cubit.addTodo(title);
+                              return CustomTodoBottomSheet(
+                                onAdd: (title, status) {
+                                  cubit.addTodo(title, status);
                                 },
                               );
                             },

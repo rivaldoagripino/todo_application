@@ -24,10 +24,10 @@ class TodoCubit extends Cubit<TodoState> {
     emit(state.copyWith(selectedFilter: value));
   }
 
-  Future<void> addTodo(String title) async {
+  Future<void> addTodo(String title, TodoItemStatus status) async {
     final newTodo = TodoItemModel(
       title: title,
-      status: TodoItemStatus.pending,
+      status: status,
     ).copyWith();
 
     final updatedList = [...state.todoList, newTodo];
