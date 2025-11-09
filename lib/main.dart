@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:todo_application/modules/todo/pages/todo_page.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:todo_application/core/routers/app_module.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ModularApp(
+      module: AppModule(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -10,9 +16,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Flutter Demo',
-      home: TodoPage(),
-    );
+      initialRoute: '/',
+    ).modular();
   }
 }

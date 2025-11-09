@@ -10,6 +10,8 @@ class AppColors {
   static final blue = HexColor.fromHex('#000FFF');
 
   static final black = HexColor.fromHex('#000000');
+
+  static final red = HexColor.fromHex('#FF0000');
 }
 
 extension HexColor on Color {
