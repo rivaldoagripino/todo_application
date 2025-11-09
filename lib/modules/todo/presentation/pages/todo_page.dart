@@ -93,7 +93,19 @@ class _TodoPageState extends ModularCubitState<TodoPage, TodoCubit> {
                               ),
                               const Spacer(),
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () => showModalBottomSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  builder: (context) {
+                                    return CustomTodoBottomSheet(
+                                      todoItem: todo,
+                                      onEdit: (updatedItem) {
+                                        cubit.editTodo(updatedItem);
+                                      },
+                                    );
+                                  },
+                                ),
                                 icon: const Icon(Icons.edit),
                               )
                             ],

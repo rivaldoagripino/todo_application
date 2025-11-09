@@ -30,7 +30,7 @@ class TodoItemModel {
     TodoItemStatus? status,
   }) {
     return TodoItemModel(
-      id: id ?? generateId(),
+      id: id ?? this.id ?? generateId(),
       title: title ?? this.title,
       status: status ?? this.status,
     );

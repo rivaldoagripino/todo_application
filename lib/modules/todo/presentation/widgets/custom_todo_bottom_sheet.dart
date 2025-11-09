@@ -7,10 +7,14 @@ import 'package:todo_application/modules/todo/domain/models/todo_item_model.dart
 class CustomTodoBottomSheet extends StatefulWidget {
   const CustomTodoBottomSheet({
     super.key,
-    required this.onAdd,
+    this.todoItem,
+    this.onAdd,
+    this.onEdit,
   });
 
-  final Function(String, TodoItemStatus) onAdd;
+  final TodoItemModel? todoItem;
+  final Function(String, TodoItemStatus)? onAdd;
+  final Function(TodoItemModel)? onEdit;
 
   @override
   State<CustomTodoBottomSheet> createState() => _CustomTodoBottomSheetState();
@@ -24,6 +28,11 @@ class _CustomTodoBottomSheetState extends State<CustomTodoBottomSheet> {
   @override
   void initState() {
     super.initState();
+    if (widget.todoItem != null) {
+      _titleController.text = widget.todoItem!.title;
+      _selectedStatus = widget.todoItem!.status;
+      _isButtonEnabled = true;
+    }
     _titleController.addListener(_updateButtonState);
   }
 
@@ -69,7 +78,7 @@ class _CustomTodoBottomSheetState extends State<CustomTodoBottomSheet> {
             ),
             const SizedBox(height: AppDimensions.kMarginMedium),
             Text(
-              'Add Task',
+              widget.todoItem != null ? 'Edit Task' : 'Add Task',
               style: AppTextStyles.nunitoBold20,
             ),
             const SizedBox(height: AppDimensions.kMarginMedium),
@@ -133,8 +142,16 @@ class _CustomTodoBottomSheetState extends State<CustomTodoBottomSheet> {
               child: ElevatedButton(
                 onPressed: _isButtonEnabled
                     ? () {
-                        widget.onAdd(
-                            _titleController.text.trim(), _selectedStatus);
+                        if (widget.todoItem != null) {
+                          final updatedItem = widget.todoItem!.copyWith(
+                            title: _titleController.text.trim(),
+                            status: _selectedStatus,
+                          );
+                          widget.onEdit?.call(updatedItem);
+                        } else {
+                          widget.onAdd?.call(
+                              _titleController.text.trim(), _selectedStatus);
+                        }
                         Navigator.pop(context);
                       }
                     : null,
@@ -149,7 +166,7 @@ class _CustomTodoBottomSheetState extends State<CustomTodoBottomSheet> {
                   elevation: 0,
                 ),
                 child: Text(
-                  'Add Task',
+                  widget.todoItem != null ? 'Save' : 'Add Task',
                   style: AppTextStyles.nunitoBold16.copyWith(
                     color:
                         _isButtonEnabled ? AppColors.white : Colors.grey[500],

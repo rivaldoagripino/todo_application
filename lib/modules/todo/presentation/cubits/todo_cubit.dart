@@ -59,4 +59,12 @@ class TodoCubit extends Cubit<TodoState> {
     await CustomSharedPreferences.removeTodoItem(state.selectedItems);
     emit(state.copyWith(todoList: updatedList, selectedItems: []));
   }
+
+  Future<void> editTodo(TodoItemModel updatedItem) async {
+    final updatedList = state.todoList.map((item) {
+      return item.id == updatedItem.id ? updatedItem : item;
+    }).toList();
+    emit(state.copyWith(todoList: updatedList));
+    await CustomSharedPreferences.setTodoList(updatedList);
+  }
 }
