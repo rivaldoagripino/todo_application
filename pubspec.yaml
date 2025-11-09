@@ -1,6 +1,6 @@
 name: todo_application
-description: "A new Flutter project."
-publish_to: 'none'
+description: "A Project to idez digital"
+publish_to: 'Rivaldo Pedro'
 
 version: 1.0.0+1
 
@@ -24,6 +24,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  bloc_test: ^9.1.5
+  mocktail: ^1.0.1
 
   flutter_lints: ^4.0.0
 
